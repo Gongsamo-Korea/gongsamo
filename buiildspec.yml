@@ -1,0 +1,21 @@
+# buildspec.yml
+
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build Starting on `date`
+      - chmod +x ./gradlew
+      - ./gradlew clean build
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
+      - echo $(basename ./build/libs/*.jar)
+      - pwd
+
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
