@@ -19,6 +19,14 @@ phases:
       - echo $(basename ./build/libs/*.jar)
       - pwd
 
+artifacts:
+  files:
+    - appspec.yml
+    - build/libs/*.jar
+    - scripts/**
+  discard-paths: yes
+  base-directory: gongsamo
+
 cache:
   paths:
     - '/root/.gradle/caches/**/*'
