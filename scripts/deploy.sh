@@ -37,13 +37,17 @@ echo ">>> $APPLICATION_JAR 를 배포합니다."
 CURRENT_SERVER_ADDRESS=$(hostname -I)
 echo "> CURRENT_SERVER_ADDRESS : $CURRENT_SERVER_ADDRESS"
 
-if [ ${CURRENT_SERVER_ADDRESS} = "192.168.1.55" ]
-then
+if [ ${CURRENT_SERVER_ADDRESS} = "192.168.1.62" ]
+  then
   echo "> 개발서버이므로 개발 환경으로 배포합니다."
   java -jar -Dspring.profiles.active=dev $APPLICATION_JAR > /dev/null 2> /dev/null < /dev/null &
-else
+elif [ ${CURRENT_SERVER_ADDRESS} = "192.168.1.0" ]
+  then
   echo "> 운영서버이므로 운영 환경으로 배포합니다."
   java -jar -Dspring.profiles.active=prod $APPLICATION_JAR > /dev/null 2> /dev/null < /dev/null &
+else
+  echo -e "${txtgrn}>>>>> 존재하지 않는 환경입니다. 프로세스를 종료합니다. ${txtrst}"
+  exit 0
 fi
 
-echo "🏃🏃🏃 GONGSAMO PLATFORM 배포 완료 🏃🏃🏃"
+echo "🏃🏃🏃 GONGSAMO PLATFORM 배포가 완료되었습니다. 🏃🏃🏃"

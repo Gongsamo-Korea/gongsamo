@@ -1,4 +1,6 @@
 #!/bin/bash
+
+echo -e "\n\n"
 echo "🏃🏃🏃 GONGSAMO PLATFORM HEALTH CHECK 를 시작합니다. 🏃🏃🏃"
 echo ">>> ps -ef | grep java"
 
