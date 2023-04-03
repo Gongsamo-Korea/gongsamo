@@ -1,0 +1,24 @@
+# appspec.yml
+
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/gongsamo/build/
+
+permissions:
+  - object: /
+    pattern : "**"
+    mode : 755
+    owner : ubuntu
+    group : ubuntu
+
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 60
+      runas: ubuntu
+  ValidateService:
+    - location: healthCheck.sh
+      timeout: 60
+      runas: ubuntu
