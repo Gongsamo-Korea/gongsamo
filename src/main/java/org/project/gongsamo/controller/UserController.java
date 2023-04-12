@@ -1,5 +1,6 @@
 package org.project.gongsamo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.project.gongsamo.domain.Users;
 import org.project.gongsamo.dto.TokenInfo;
@@ -30,20 +31,16 @@ public class UserController {
         String email = userAuthRequestDto.getEmail();
         String password = userAuthRequestDto.getPassword();
 
-        TokenInfo tokenInfo = userService.login(email, password);
-
-        return ResponseEntity.ok().body(tokenInfo);
+        return ResponseEntity.ok().body(userService.login(email, password));
     }
 
 
 
     @PostMapping("/refresh-token")
-    public String refresh(@RequestBody UserAuthRequestDto userAuthRequestDto) {
-//
-//        String email = userLoginRequestDto.getEmail();
-//        String password = userLoginRequestDto.getPassword();
-//        TokenInfo tokenInfo = userService.login(email, password);
-        return "done";
+    public ResponseEntity<Object> refresh(HttpServletRequest request) {
+
+
+      return ResponseEntity.ok().body(userService.reIssueAccessToken(request));
     }
 
 

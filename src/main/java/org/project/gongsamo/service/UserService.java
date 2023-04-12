@@ -1,5 +1,6 @@
 package org.project.gongsamo.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.project.gongsamo.domain.Users;
 import org.project.gongsamo.dto.TokenInfo;
@@ -60,6 +61,15 @@ public class UserService {
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+
+        return tokenInfo;
+    }
+
+    public TokenInfo reIssueAccessToken(HttpServletRequest request){
+        String refreshToken = jwtTokenProvider.resolveToken(request);
+        Authentication authentication = jwtTokenProvider.getAuthentication(refreshToken);
+
+        TokenInfo tokenInfo = jwtTokenProvider.generateAccessToken(authentication);
 
         return tokenInfo;
     }
