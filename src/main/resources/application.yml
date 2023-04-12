@@ -1,7 +1,9 @@
 # common setting
 spring:
   jpa:
-    show-sql: true
+#    show-sql: true
+    hibernate:
+#      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -9,10 +11,43 @@ spring:
     property-naming-strategy: SNAKE_CASE
     serialization:
       write_dates_as_timestamps: false
+jwt:
+  secret:
+    YYkTWZQmbEBydFVnj+R024uET7cAGz6HiJqb9UERV9g=
+  access-token-expiration-in-ms:
+    36000000
+  refreshTokenExpirationInMs:
+    1209600000
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
+
 
 ---
 # local
-# h2 database
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://gongsamo-dev-rds-2a.cx02ihqfn9bx.ap-northeast-2.rds.amazonaws.com:3306/gongsamo_dev?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: gonsamo_dev
+    password: -dN_p]M*Q\i4
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: Hikari
+      auto-commit: false
+      max-lifetime: 1800000     #30분
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  jpa:
+    database: mysql
+
+
 
 ---
 # dev
