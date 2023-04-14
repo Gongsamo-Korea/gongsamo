@@ -2,6 +2,7 @@ package org.project.gongsamo.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.project.gongsamo.domain.Users;
 import org.project.gongsamo.dto.TokenInfo;
 import org.project.gongsamo.dto.UserAuthRequestDto;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,27 +28,26 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public Users saveUser(UserAuthRequestDto userAuthRequestDto) {
+    public Users saveUser(UserAuthRequestDto userAuthRequestDto) throws IllegalStateException{
         Users user = Users.createUser(userAuthRequestDto, passwordEncoder);
 
-        validateDuplicateUser(user);
-        validateDuplicateNickName(user);
+        validateDuplicate(user);
+
         return usersQueryRepository.save(user);
     }
 
-    private void validateDuplicateUser(Users user) {
-        Optional<Users> optionalUsers = usersQueryRepository.findByEmail(user.getEmail());
-        if (optionalUsers.isPresent()) {
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+    private void validateDuplicate(Users user) throws IllegalStateException {
+        Optional<Users> optionalUsers = usersQueryRepository.findByEmailOrNickName(user);
+
+        if (user.getEmail().equals(optionalUsers.map(Users::getEmail).orElse(""))){
+            throw new IllegalStateException("DUPLICATED_EMAIL");
+        }
+        if (user.getNickname().equals(optionalUsers.map(Users::getNickname).orElse(""))) {
+            throw new IllegalStateException("DUPLICATED_NICKNAME");
         }
     }
 
-    private void validateDuplicateNickName(Users user) {
-        Optional<Users> optionalUsers = usersQueryRepository.findByEmail(user.getNickname());
-        if (optionalUsers.isPresent()) {
-            throw new IllegalStateException("이미 존재하는 닉네임입니다.");
-        }
-    }
+
 
     @Transactional
     public TokenInfo login(String email, String password) {
@@ -73,4 +74,6 @@ public class UserService {
 
         return tokenInfo;
     }
+
+
 }

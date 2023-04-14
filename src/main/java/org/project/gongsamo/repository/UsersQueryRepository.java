@@ -31,10 +31,11 @@ public class UsersQueryRepository {
                 .fetchOne());
     }
 
-    public Optional<Users> findByNickName(String nickName) {
+    public Optional<Users> findByEmailOrNickName(Users user) {
         return Optional.ofNullable(jpaQueryFactory
                 .selectFrom(users)
-                .where(users.nickname.eq(nickName))
+                .where(users.nickname.eq(user.getNickname())
+                        .or(users.email.eq(user.getEmail())))
                 .fetchOne());
     }
 
