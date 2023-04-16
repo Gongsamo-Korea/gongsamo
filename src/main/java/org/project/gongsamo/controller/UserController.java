@@ -60,9 +60,9 @@ public class UserController {
 
 
     @GetMapping("/testPing")
-    public String testPing() {
+    public ResponseEntity<Object> testPing() {
 
-        return "test-response";
+        return ResponseEntity.ok().body("test-response");
     }
 
 }
