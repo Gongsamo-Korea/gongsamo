@@ -3,7 +3,7 @@ spring:
   jpa:
 #    show-sql: true
     hibernate:
-#      ddl-auto: create
+#      ddl-auto: create # 주의 :주석 해재할 경우 데이터 날라감
     properties:
       hibernate:
         format_sql: true

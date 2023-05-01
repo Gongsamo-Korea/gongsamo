@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,19 +29,24 @@ public class Users implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true , columnDefinition = "VARCHAR(40) COMMENT '비밀번호'")
     private String email;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition = "VARCHAR(20) COMMENT '비밀번호'")
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(20) COMMENT '닉네임'")
     private String nickname;
 
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false,columnDefinition = "VARCHAR(10) COMMENT '역할'")
     private UserRole role;
+
+    @Column(nullable = false,columnDefinition = "datetime DEFAULT now() COMMENT '등록일'")
+    private LocalDateTime registerDate;
+
     public static Users createUser(UserAuthRequestDto userAuthRequestDto, PasswordEncoder passwordEncoder) {
         Users users = Users.builder()
                 .email(userAuthRequestDto.getEmail())
