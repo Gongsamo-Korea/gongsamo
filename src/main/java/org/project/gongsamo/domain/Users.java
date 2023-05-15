@@ -4,18 +4,20 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.project.gongsamo.domain.Enum.UserRole;
 import org.project.gongsamo.dto.UserAuthRequestDto;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
+
+
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Builder
 @Getter
@@ -33,7 +35,7 @@ public class Users implements UserDetails {
     private String email;
 
 
-    @Column(nullable = false,columnDefinition = "VARCHAR(20) COMMENT '비밀번호'")
+    @Column(nullable = false,columnDefinition = "VARCHAR(60) COMMENT '비밀번호'")
     private String password;
 
     @Column(nullable = false, unique = true, columnDefinition = "VARCHAR(20) COMMENT '닉네임'")
@@ -44,6 +46,7 @@ public class Users implements UserDetails {
     @Column(nullable = false,columnDefinition = "VARCHAR(10) COMMENT '역할'")
     private UserRole role;
 
+    @CreatedDate
     @Column(nullable = false,columnDefinition = "datetime DEFAULT now() COMMENT '등록일'")
     private LocalDateTime registerDate;
 
