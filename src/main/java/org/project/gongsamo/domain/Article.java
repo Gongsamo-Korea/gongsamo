@@ -2,6 +2,7 @@ package org.project.gongsamo.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +18,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long articleId;
 
-    @Column(columnDefinition = "int COMMENT '발행호수'")
+    @Column(columnDefinition = "int COMMENT '발행 호수'")
     private int issueNumber;
 
     @Column(columnDefinition = "VARCHAR(40) COMMENT '목차'")
@@ -29,16 +30,13 @@ public class Article {
     @Column(columnDefinition = "VARCHAR(100) COMMENT '썸네일 URL'")
     private String thumbnailUrl;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(100) COMMENT '컨텐트'")
+    @Column(nullable = false, columnDefinition = "VARCHAR(100) COMMENT '컨텐츠'")
     private String content;
 
     @Column(columnDefinition = "bigint DEFAULT 0 COMMENT '조회 수'")
     private long viewCount;
 
-    @Column(nullable = false, columnDefinition = "boolean DEFAULT 0 COMMENT '삭제여부'")
-    private boolean isDeleted;
-
-    @Column(nullable = false, columnDefinition = "datetime DEFAULT now() COMMENT '삭제일'")
+    @Column(columnDefinition = "COMMENT '삭제일'")
     private LocalDateTime deleteDate;
 
     @Column(nullable = false, columnDefinition = "datetime DEFAULT now() COMMENT '발행일'")
@@ -47,4 +45,7 @@ public class Article {
     @Column(nullable = false, columnDefinition = "datetime DEFAULT now() COMMENT '등록일'")
     private LocalDateTime registerDate;
 
+    public boolean isDeleted() {
+        return deleteDate != null;
+    }
 }
