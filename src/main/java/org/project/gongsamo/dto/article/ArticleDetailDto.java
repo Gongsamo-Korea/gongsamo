@@ -1,25 +1,28 @@
 package org.project.gongsamo.dto.article;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 import org.project.gongsamo.domain.Article;
+import org.project.gongsamo.domain.ArticleTag;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Getter
-public class ArticleResponseDto {
+@AllArgsConstructor
+public class ArticleDetailDto {
     private long id;
-    private int issueNumber;
+    private String issueNumber;
     private String tableOfContent;
     private String title;
     private String thumbnailUrl;
     private String content;
     private long viewCount;
     private LocalDateTime issueDate;
+    private List<ArticleTag> tags;
 
-    public static ArticleResponseDto from(Article article) {
-        return ArticleResponseDto.builder()
+    public static ArticleDetailDto from(Article article) {
+        return ArticleDetailDto.builder()
                 .id(article.getArticleId())
                 .issueNumber(article.getIssueNumber())
                 .tableOfContent(article.getTableOfContent())
@@ -28,6 +31,7 @@ public class ArticleResponseDto {
                 .content(article.getContent())
                 .viewCount(article.getViewCount())
                 .issueDate(article.getIssueDate())
+                .tags(article.getTags())
                 .build();
     }
 }
