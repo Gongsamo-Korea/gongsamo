@@ -1,4 +1,4 @@
-package org.project.gongsamo;
+package org.project.gongsamo.controller;
 
 import org.project.gongsamo.domain.Article;
 import org.project.gongsamo.dto.article.ArticleDetailDto;
