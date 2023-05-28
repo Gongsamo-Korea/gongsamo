@@ -36,6 +36,7 @@ public class Article {
     private String thumbnailUrl;
 
     @Column(nullable = false, columnDefinition = "LONGTEXT COMMENT '컨텐츠'")
+    @ToString.Exclude
     private String content;
 
     @Column(columnDefinition = "BIGINT DEFAULT 0 COMMENT '조회 수'")

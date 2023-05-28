@@ -21,12 +21,6 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Article>> articles(Pageable pageable) {
-        var articles = articleService.getAllArticles(pageable);
-        return ResponseEntity.ok(articles);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ArticleDetailDto>> article(@PathVariable("id") Long id) {
         var article = articleService.getArticle(id).map(ArticleDetailDto::from);
@@ -34,4 +28,17 @@ public class ArticleController {
         if (article.isEmpty()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(article);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Article>> allArticles(Pageable pageable) {
+        var articles = articleService.getAllArticles(pageable);
+        return ResponseEntity.ok(articles);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Article>> searchedArticles(@RequestParam("keyword") String keyword, Pageable pageable) {
+        var articles = articleService.searchArticles(keyword, pageable);
+        return ResponseEntity.ok(articles);
+    }
+
 }

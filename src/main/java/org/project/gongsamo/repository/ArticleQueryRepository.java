@@ -28,10 +28,22 @@ public class ArticleQueryRepository {
                 .fetchOne());
     }
 
-    public List<Article> search(String keyword, Pageable pageable) {
+    public List<Article> findAll(Pageable pageable) {
         return jpaQueryFactory
                 .selectFrom(article)
                 .where(article.isDeleted.eq(false))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
+
+    public List<Article> search(String keyword, Pageable pageable) {
+        return jpaQueryFactory
+                .selectFrom(article)
+                .where(
+                        article.isDeleted.eq(false),
+                        article.content.containsIgnoreCase(keyword)
+                )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
