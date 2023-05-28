@@ -27,7 +27,7 @@ public class ArticleController {
         return ResponseEntity.ok(articles);
     }
 
-    @GetMapping(  "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<ArticleDetailDto>> article(@PathVariable("id") Long id) {
         var article = articleService.getArticle(id).map(ArticleDetailDto::from);
 

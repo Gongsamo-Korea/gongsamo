@@ -16,13 +16,15 @@ import static org.project.gongsamo.domain.QArticle.article;
 @RequiredArgsConstructor
 public class ArticleQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
-    private final EntityManager em;
+    private final EntityManager entityManager;
 
     public Optional<Article> findById(Long articleId) {
         return Optional.ofNullable(jpaQueryFactory
                 .selectFrom(article)
-                .where(article.isDeleted.eq(false)
-                        .and(article.articleId.eq(articleId)))
+                .where(
+                        article.isDeleted.eq(false),
+                        article.articleId.eq(articleId)
+                )
                 .fetchOne());
     }
 
@@ -36,7 +38,7 @@ public class ArticleQueryRepository {
     }
 
     public Article save(Article article) {
-        em.persist(article);
+        entityManager.persist(article);
         return article;
     }
 }
