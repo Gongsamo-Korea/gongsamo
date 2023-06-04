@@ -1,8 +1,6 @@
 package org.project.gongsamo.controller;
 
-import org.project.gongsamo.domain.Article;
 import org.project.gongsamo.dto.article.ArticleDetailDto;
-import org.project.gongsamo.dto.article.ArticleFormDto;
 import org.project.gongsamo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -23,12 +21,6 @@ public class ArticleController {
     public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
     }
-
-//    @PostMapping
-//    public ResponseEntity<Article> createArticle(@RequestBody ArticleFormDto article) {
-//        var createdArticle = articleService.createArticle(ArticleFormDto::toEntity(article));
-//        return ResponseEntity.ok(createdArticle);
-//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ArticleDetailDto>> article(@PathVariable("id") Long id) {

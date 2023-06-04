@@ -42,6 +42,7 @@ public class Article {
     @Column(columnDefinition = "BIGINT DEFAULT 0 COMMENT '조회 수'")
     private long viewCount;
 
+    @Builder.Default
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<ArticleTag> articleTags = new ArrayList<>();

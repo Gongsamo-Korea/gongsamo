@@ -34,6 +34,7 @@ public class ArticleQueryRepository {
                 .where(article.isDeleted.eq(false))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .orderBy(article.issueNumber.desc())
                 .fetch();
     }
 
@@ -46,6 +47,7 @@ public class ArticleQueryRepository {
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
+                .orderBy(article.issueNumber.desc())
                 .fetch();
     }
 
