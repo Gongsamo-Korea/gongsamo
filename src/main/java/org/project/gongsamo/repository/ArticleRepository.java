@@ -14,7 +14,7 @@ import static org.project.gongsamo.domain.QArticle.article;
 
 @Repository
 @RequiredArgsConstructor
-public class ArticleQueryRepository {
+public class ArticleRepository {
     private final JPAQueryFactory jpaQueryFactory;
     private final EntityManager entityManager;
 

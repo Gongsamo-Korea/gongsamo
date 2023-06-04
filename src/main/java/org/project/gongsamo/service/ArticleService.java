@@ -1,7 +1,7 @@
 package org.project.gongsamo.service;
 
 import org.project.gongsamo.domain.Article;
-import org.project.gongsamo.repository.ArticleQueryRepository;
+import org.project.gongsamo.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Service
 public class ArticleService {
-    private final ArticleQueryRepository articleRepository;
+    private final ArticleRepository articleRepository;
 
     @Autowired
-    public ArticleService(ArticleQueryRepository articleRepository) {
+    public ArticleService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
