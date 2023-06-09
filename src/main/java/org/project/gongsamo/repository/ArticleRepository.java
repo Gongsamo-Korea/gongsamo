@@ -1,5 +1,6 @@
 package org.project.gongsamo.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -11,16 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.project.gongsamo.domain.QArticle.article;
+import static org.project.gongsamo.domain.QArticleTag.articleTag;
+import static org.project.gongsamo.domain.QTag.tag;
 
 @Repository
 @RequiredArgsConstructor
 public class ArticleRepository {
-    private final JPAQueryFactory jpaQueryFactory;
     private final EntityManager entityManager;
+    private final JPAQueryFactory jpaQueryFactory;
 
     public Optional<Article> findById(Long articleId) {
-        return Optional.ofNullable(jpaQueryFactory
+        return Optional.ofNullable(
+            jpaQueryFactory
                 .selectFrom(article)
+                .leftJoin(article.articleTags, articleTag).fetchJoin()
+                .leftJoin(articleTag.tag, tag).fetchJoin()
                 .where(
                         article.isDeleted.eq(false),
                         article.articleId.eq(articleId)
@@ -28,22 +34,14 @@ public class ArticleRepository {
                 .fetchOne());
     }
 
-    public List<Article> findAll(Pageable pageable) {
-        return jpaQueryFactory
-                .selectFrom(article)
-                .where(article.isDeleted.eq(false))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .orderBy(article.issueNumber.desc())
-                .fetch();
-    }
-
     public List<Article> search(String keyword, Pageable pageable) {
         return jpaQueryFactory
                 .selectFrom(article)
+                .leftJoin(article.articleTags, articleTag).fetchJoin()
+                .leftJoin(articleTag.tag, tag).fetchJoin()
                 .where(
                         article.isDeleted.eq(false),
-                        article.content.containsIgnoreCase(keyword)
+                        validKeyword(keyword)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -54,5 +52,12 @@ public class ArticleRepository {
     public Article save(Article article) {
         entityManager.persist(article);
         return article;
+    }
+
+    private BooleanExpression validKeyword(String keyword) {
+        if (keyword.isBlank()) {
+            return null;
+        }
+        return article.content.containsIgnoreCase(keyword);
     }
 }

@@ -9,7 +9,6 @@ import org.hibernate.annotations.GenerationTime;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -66,6 +65,6 @@ public class Article {
     private LocalDateTime registerDate;
 
     public List<Tag> getTags() {
-        return articleTags.stream().map(ArticleTag::getTag).collect(Collectors.toList());
+        return getArticleTags().stream().map(ArticleTag::getTag).toList();
     }
 }
