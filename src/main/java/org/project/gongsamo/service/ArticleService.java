@@ -22,15 +22,11 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-    public Optional<Article> getArticle(Long id) {
+    public Optional<Article> findArticle(Long id) {
         return articleRepository.findById(id);
     }
 
-    public List<Article> getAllArticles(Pageable pageable) {
-        return articleRepository.findAll(pageable);
-    }
-
-    public List<Article> searchArticles(String keyword, Pageable pageable) {
+    public List<Article> findArticles(String keyword, Pageable pageable) {
         return articleRepository.search(keyword, pageable);
     }
 }

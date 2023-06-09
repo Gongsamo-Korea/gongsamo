@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping("/articles")
 public class ArticleController {
     private final ArticleService articleService;
     private final int PAGE_SIZE = 9;
@@ -24,22 +24,15 @@ public class ArticleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ArticleDetailDto>> article(@PathVariable("id") Long id) {
-        var article = articleService.getArticle(id).map(ArticleDetailDto::from);
+        var article = articleService.findArticle(id).map(ArticleDetailDto::from);
 
         if (article.isEmpty()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(article);
     }
 
     @GetMapping
-    public ResponseEntity<List<ArticleDetailDto>> allArticles(@PageableDefault(size = PAGE_SIZE) Pageable pageable) {
-        var articles = articleService.getAllArticles(pageable).stream().map(ArticleDetailDto::from).toList();
+    public ResponseEntity<List<ArticleDetailDto>> articles(@RequestParam(defaultValue = "") String keyword, @PageableDefault(page = 1, size = PAGE_SIZE) Pageable pageable) {
+        var articles = articleService.findArticles(keyword, pageable).stream().map(ArticleDetailDto::from).toList();
         return ResponseEntity.ok(articles);
     }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<ArticleDetailDto>> searchedArticles(@RequestParam("keyword") String keyword, @PageableDefault(size = PAGE_SIZE) Pageable pageable) {
-        var articles = articleService.searchArticles(keyword, pageable).stream().map(ArticleDetailDto::from).toList();
-        return ResponseEntity.ok(articles);
-    }
-
 }

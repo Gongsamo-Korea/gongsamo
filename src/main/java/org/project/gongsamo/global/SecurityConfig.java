@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/api/**").permitAll()
+                .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/articles/**").permitAll()
                 .requestMatchers("/user/*").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
