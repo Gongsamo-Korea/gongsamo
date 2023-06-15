@@ -23,6 +23,8 @@ logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
 
+#swagger config
+springdoc.paths-to-match: /**
 
 ---
 # local
