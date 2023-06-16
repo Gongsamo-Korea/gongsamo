@@ -27,16 +27,16 @@ public class Banner {
     @Column(name = "hyperlink_url", columnDefinition = "TEXT")
     private String hyperLinkUrl;
 
-    @Column(name = "start_dt", nullable = false)
+    @Column(name = "start_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime startDt;
+    private LocalDateTime startDate;
 
-    @Column(name = "end_dt", nullable = false)
+    @Column(name = "end_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime endDt;
+    private LocalDateTime endDate;
 
-    @Column(name = "use_yn", nullable = false)
-    private boolean useYn;
+    @Column(name = "is_displayed", nullable = false)
+    private boolean isDisplayed;
 
     @Column(name = "exposure_order")
     private Integer exposureOrder;
