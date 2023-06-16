@@ -3,7 +3,6 @@ package org.project.gongsamo.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.project.gongsamo.domain.Users;
 import org.project.gongsamo.dto.TokenInfo;
 import org.project.gongsamo.dto.UserAuthRequestDto;
 import org.project.gongsamo.repository.UsersQueryRepository;
@@ -25,15 +24,13 @@ public class UserController {
     @PostMapping("/signUp")
     public ResponseEntity<Object> signUp(@RequestBody UserAuthRequestDto userAuthRequestDto) {
        try{
-           Users user = userService.saveUser(userAuthRequestDto);
+           userService.saveUser(userAuthRequestDto);
            TokenInfo tokenInfo = userService.login(userAuthRequestDto.getEmail(), userAuthRequestDto.getPassword());
            return ResponseEntity.status(HttpStatus.OK).body(tokenInfo);
        }
        catch (IllegalStateException e){
-           HashMap result = new HashMap();
-           if("DUPLICATED_EMAIL".equals(e.getMessage())){
-               result.put("MESSAGE", e.getMessage());
-           } else if ("DUPLICATED_NICKNAME".equals(e.getMessage())) {
+           HashMap<String,Object> result = new HashMap<>();
+           if("DUPLICATED_EMAIL".equals(e.getMessage()) || "DUPLICATED_NICKNAME".equals(e.getMessage())){
                result.put("MESSAGE", e.getMessage());
            }
            return ResponseEntity.status(HttpStatus.CONFLICT).body(result);
@@ -51,7 +48,7 @@ public class UserController {
 
 
 
-    @PostMapping("/refresh-token")
+    @PostMapping("/refreshToken")
     public ResponseEntity<Object> refresh(HttpServletRequest request) {
 
 
