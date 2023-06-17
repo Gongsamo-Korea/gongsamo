@@ -55,6 +55,13 @@ spring:
   jpa:
     database: mysql
 
+<<<<<<< HEAD
+=======
+  redis:
+    host: localhost
+    port: 6379
+
+>>>>>>> 87a2bb2 (feat: viewcount api)
 ---
 # dev
 
@@ -80,6 +87,10 @@ spring:
   jpa:
     database: mysql
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  redis:
+    host: localhost
+    port: 6379
 
 ---
 # prod
