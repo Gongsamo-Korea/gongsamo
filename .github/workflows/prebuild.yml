@@ -1,0 +1,27 @@
+name: Prebuild
+
+on:
+  pull-request:
+    branches:
+      - dev
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check-build:
+    name: CI with Gradle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Permit Gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build Gradle
+        run: ./gradlew build
