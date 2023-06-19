@@ -27,6 +27,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/articles/**").permitAll()
+                .requestMatchers( "/swagger-ui/**",  "/v3/api-docs/**", "/swagger-resources/**","/swagger-ui.html").hasRole("ADMIN")
                 .requestMatchers("/user/*").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
@@ -38,4 +39,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
          return new BCryptPasswordEncoder();
     }
+
 }

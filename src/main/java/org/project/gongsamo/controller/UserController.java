@@ -1,5 +1,6 @@
 package org.project.gongsamo.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class UserController {
     private final UserService userService;
     private final UsersQueryRepository usersQueryRepository;
 
+    @Operation(summary = "sign up for a new user", description = "회원가입을 한다.")
     @PostMapping("/signUp")
     public ResponseEntity<Object> signUp(@RequestBody UserAuthRequestDto userAuthRequestDto) {
        try{
