@@ -22,8 +22,8 @@ public class BannerQueryRepository {
         return jpaQueryFactory
                 .select(Projections.constructor(BannerDto.class, banner.bannerText, banner.thumbnailUrl, banner.hyperLinkUrl, banner.exposureOrder))
                 .from(banner)
-                .where(banner.startDt.loe(now), banner.endDt.goe(now)
-                        .and(banner.useYn.isTrue()))
+                .where(banner.startDate.loe(now), banner.endDate.goe(now)
+                        .and(banner.isDisplayed.isTrue()))
                 .orderBy(banner.exposureOrder.asc())
                 .fetch();
     }
