@@ -27,7 +27,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/articles/**","/banners").permitAll()
-                .requestMatchers( "/swagger-ui/**",  "/v3/api-docs/**", "/swagger-resources/**","/swagger-ui.html").hasRole("ADMIN")
+                //임시로 swagger 허용
+                .requestMatchers( "/swagger-ui/**",  "/v3/api-docs/**", "/swagger-resources/**","/swagger-ui.html").permitAll()
                 .requestMatchers("/user/*").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
