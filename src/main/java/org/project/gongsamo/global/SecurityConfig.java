@@ -26,8 +26,9 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/login","/refresh-token","/signUp","/testPing").permitAll()
-                .requestMatchers( "/swagger-ui/**",  "/v3/api-docs/**", "/swagger-resources/**","/swagger-ui.html").hasRole("ADMIN")
+                .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/articles/**","/banners").permitAll()
+                //임시로 swagger 허용
+                .requestMatchers( "/swagger-ui/**",  "/v3/api-docs/**", "/swagger-resources/**","/swagger-ui.html").permitAll()
                 .requestMatchers("/user/*").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
@@ -39,5 +40,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
          return new BCryptPasswordEncoder();
     }
-
 }
