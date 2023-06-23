@@ -19,32 +19,35 @@ repositories {
 }
 
 dependencies {
-    //database
-    implementation 'mysql:mysql-connector-java:8.0.32'     //mysql
+    // database
+    implementation 'mysql:mysql-connector-java:8.0.32' //mysql
 
-    //jpa
+    // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     //querydsl
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta") // querydsl JPAAnnotationProcessor 사용 지정
-    annotationProcessor("jakarta.annotation:jakarta.annotation-api") // java.lang.NoClassDefFoundError (javax.annotation.Generated) 발생 대응
-    annotationProcessor("jakarta.persistence:jakarta.persistence-api") // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta' // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api' // java.lang.NoClassDefFoundError (javax.annotation.Generated) 발생 대응
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api' // java.lang.NoClassDefFoundError(javax.annotation.Entity) 발생 대응
 
-    //spring-web
+    // elasticsearch
+    implementation 'org.springframework.data:spring-data-elasticsearch:5.0.0' // elasticsearch: 8.5.3, springboot: 3.0.x (@see https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#preface.versions
+
+    // spring-web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-    //lombok
+    // lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testCompileOnly 'org.projectlombok:lombok'      //테스트에서 lombok 사용
-    testAnnotationProcessor 'org.projectlombok:lombok'      //테스트에서 lombok 사용
+    testCompileOnly 'org.projectlombok:lombok' // 테스트에서 lombok 사용
+    testAnnotationProcessor 'org.projectlombok:lombok' //테스트에서 lombok 사용
 
-    //dev-tools
+    // dev-tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    //security
+    // security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     testImplementation 'org.springframework.security:spring-security-test'
@@ -54,16 +57,16 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-    //log
+    // log
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
     implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'org.slf4j:log4j-over-slf4j:1.8.0-beta2'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
-    //swagger
+    // swagger
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.2'
 
-
-    //test
+    // test
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -73,7 +76,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-//querydsl
+// querydsl
 def querydslDir = "$buildDir/generated/querydsl"
 
 sourceSets {

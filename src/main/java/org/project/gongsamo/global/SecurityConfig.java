@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/articles/**","/banners").permitAll()
+                .requestMatchers("/login","/refresh-token","/signUp","/testPing", "/articles/**", "/articles/search", "/banners").permitAll()
                 //임시로 swagger 허용
                 .requestMatchers( "/swagger-ui/**",  "/v3/api-docs/**", "/swagger-resources/**","/swagger-ui.html").permitAll()
                 .requestMatchers("/user/*").hasRole("USER")

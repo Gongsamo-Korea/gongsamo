@@ -45,7 +45,7 @@ public class ArticleRepository {
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(article.issueNumber.desc())
+                .orderBy(article.issueDate.desc())
                 .fetch();
     }
 

@@ -1,0 +1,24 @@
+version: "3"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    container_name: es
+    environment:
+      - cluster.name=gongsamo-cluster-1
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200
+      - 9300:9300
+    command: bash -c "elasticsearch && tail -f /dev/null"
+    networks:
+      - elastic
+    healthcheck:
+      test: ["CMD-SHELL", "curl", "-f", "http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 120
+networks:
+  elastic:
+    external: true
