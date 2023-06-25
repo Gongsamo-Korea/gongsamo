@@ -61,7 +61,7 @@ public class UserController {
     @GetMapping("/testPing")
     public ResponseEntity<Object> testPing() {
 
-        return ResponseEntity.ok().body("test-response2");
+        return ResponseEntity.ok().body("test-response4");
     }
 
 }
