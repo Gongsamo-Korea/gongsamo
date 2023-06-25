@@ -3,7 +3,7 @@ package org.project.gongsamo.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Formatter {
+public class Formatable {
     public static final String datetimeFormat = "yyyy-MM-dd HH:mm:ss";
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(datetimeFormat);
 

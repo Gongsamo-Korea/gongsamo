@@ -3,7 +3,7 @@ package org.project.gongsamo.dto.article;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.project.gongsamo.domain.ArticleSearch;
-import org.project.gongsamo.util.Formatter;
+import org.project.gongsamo.util.Formatable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @ToString
-public class ArticleRequestDto extends Formatter {
+public class ArticleRequestDto extends Formatable {
     @JsonProperty("issueNumber")
     private String issueNumber;
 

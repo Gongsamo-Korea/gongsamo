@@ -1,7 +1,7 @@
 package org.project.gongsamo.domain;
 
 import lombok.*;
-import org.project.gongsamo.util.Formatter;
+import org.project.gongsamo.util.Formatable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.*;
 
@@ -45,14 +45,14 @@ public class ArticleSearch {
     @Setter
     private List<TagSearch> tags = new ArrayList<>();
 
-    @Field(type = FieldType.Date, format = {}, pattern = Formatter.datetimeFormat)
+    @Field(type = FieldType.Date, format = {}, pattern = Formatable.datetimeFormat)
     @ToString.Exclude
     private LocalDateTime deleteDate = null;
 
-    @Field(type = FieldType.Date, format = {}, pattern = Formatter.datetimeFormat)
+    @Field(type = FieldType.Date, format = {}, pattern = Formatable.datetimeFormat)
     private LocalDateTime issueDate = null;
 
-    @Field(type = FieldType.Date, format = {}, pattern = Formatter.datetimeFormat)
+    @Field(type = FieldType.Date, format = {}, pattern = Formatable.datetimeFormat)
     @ToString.Exclude
     private LocalDateTime registerDate = LocalDateTime.now();
 }
