@@ -12,25 +12,25 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class ArticleRequestDto extends Formatable {
-    @JsonProperty("issueNumber")
+    @JsonProperty("issue_number")
     private String issueNumber;
 
-    @JsonProperty("tableOfContent")
+    @JsonProperty("table_of_content")
     private String tableOfContent;
 
     @JsonProperty("title")
     private String title;
 
-    @JsonProperty("thumbnailUrl")
+    @JsonProperty("thumbnail_url")
     private String thumbnailUrl;
 
     @JsonProperty("content")
     private String content;
 
-    @JsonProperty("issueDate")
+    @JsonProperty("issue_date")
     private String issueDate;
 
-    @JsonProperty("tagNames")
+    @JsonProperty("tag_names")
     private List<String> tagNames = new ArrayList<>();
 
     public ArticleSearch toEntity() {
