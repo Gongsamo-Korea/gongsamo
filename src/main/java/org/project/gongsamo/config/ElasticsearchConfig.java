@@ -12,16 +12,16 @@ import java.time.Duration;
 @Configuration
 @EnableElasticsearchRepositories
 public class ElasticsearchConfig extends ElasticsearchConfiguration {
-  @Value("${spring.elasticsearch.rest.uri}")
-  private String uri;
+    @Value("${spring.elasticsearch.rest.uri}")
+    private String uri;
 
-  @Override
-  @NonNull
-  public ClientConfiguration clientConfiguration() {
-    return ClientConfiguration.builder()
-        .connectedTo(this.uri)
-        .withSocketTimeout(Duration.ofSeconds(3))
-        .withConnectTimeout(Duration.ofSeconds(5))
-        .build();
-  }
+    @Override
+    @NonNull
+    public ClientConfiguration clientConfiguration() {
+        return ClientConfiguration.builder()
+                .connectedTo(this.uri)
+                .withSocketTimeout(Duration.ofSeconds(3))
+                .withConnectTimeout(Duration.ofSeconds(5))
+                .build();
+    }
 }

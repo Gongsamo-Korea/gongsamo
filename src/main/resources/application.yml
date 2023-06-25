@@ -33,7 +33,7 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://gongsamo-dev-rds-2a-recovery.cx02ihqfn9bx.ap-northeast-2.rds.amazonaws.com:3306/gongsamo_dev?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://gongsamo-dev-rds-2a.cx02ihqfn9bx.ap-northeast-2.rds.amazonaws.com:3306/gongsamo_dev?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: gonsamo_dev
     password: -dN_p]M*Q\i4
     driver-class-name: com.mysql.cj.jdbc.Driver
