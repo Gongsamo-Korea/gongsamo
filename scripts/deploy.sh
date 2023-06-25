@@ -50,4 +50,4 @@ else
   exit 0
 fi
 
-echo "🏃🏃🏃 GONGSAMO PLATFORM 배포가 완료되었습니다. 🏃🏃🏃"
+echo "🏃🏃🏃GONGSAMO PLATFORM 배포가 완료되었습니다.🏃🏃🏃"
