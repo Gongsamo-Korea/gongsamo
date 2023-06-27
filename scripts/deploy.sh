@@ -37,7 +37,7 @@ echo ">>> $APPLICATION_JAR 를 배포합니다."
 CURRENT_SERVER_ADDRESS=$(hostname -I)
 echo "> CURRENT_SERVER_ADDRESS : $CURRENT_SERVER_ADDRESS"
 
-if [ ${CURRENT_SERVER_ADDRESS} = "192.168.1.6" ]
+if [ ${CURRENT_SERVER_ADDRESS} = "192.168.1.32" ]
   then
   echo "> 개발서버이므로 개발 환경으로 배포합니다."
   java -jar -Dspring.profiles.active=dev $APPLICATION_JAR > /dev/null 2> /dev/null < /dev/null &
