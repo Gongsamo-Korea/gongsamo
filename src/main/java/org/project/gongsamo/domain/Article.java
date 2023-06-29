@@ -18,9 +18,8 @@ import java.util.List;
 @EqualsAndHashCode(exclude = "articleTags")
 @ToString
 public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long articleId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long articleId;
 
     @Column(columnDefinition = "VARCHAR(20) COMMENT '발행 호수'")
     private String issueNumber;
@@ -39,7 +38,7 @@ public class Article {
     private String content;
 
     @Column(columnDefinition = "BIGINT DEFAULT 0 COMMENT '조회 수'")
-    private long viewCount;
+    private Long viewCount;
 
     @Builder.Default
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)

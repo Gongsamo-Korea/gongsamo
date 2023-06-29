@@ -12,7 +12,7 @@ import lombok.*;
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tagId;
+    private Long tagId;
 
     @Column(nullable = false, length = 20)
     private String tagName;

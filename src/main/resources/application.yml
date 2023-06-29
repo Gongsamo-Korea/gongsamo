@@ -47,8 +47,13 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+  elasticsearch:
+    rest:
+      uri: localhost:9200
   jpa:
     database: mysql
+  main:
+    allow-bean-definition-overriding: true
 
 
 
