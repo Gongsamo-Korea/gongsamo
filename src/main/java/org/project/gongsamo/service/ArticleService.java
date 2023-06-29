@@ -47,17 +47,13 @@ public class ArticleService {
                 .toList();
         articleSearch.setTags(tagSearches);
 
-        Long articleId = this.articleSearchRepository.getNewId();
-        if (articleId != null) {
-            this.articleSearchRepository.validateId(articleId);
-        }
-
+        Long articleId = this.getNewId();
         articleSearch.setArticleId(articleId);
         return articleSearchRepository.save(articleSearch);
     }
 
     public Optional<ArticleSearch> findArticle(Long id) {
-        return articleSearchRepository.findById(id);
+        return articleSearchRepository.findByArticleId(id);
     }
 
     public List<ArticleSearch> searchArticles(String keyword, Pageable pageable) {
@@ -88,5 +84,10 @@ public class ArticleService {
         SearchHits<ArticleSearch> searchHits = elasticsearchOperations.search(queryBuilder.build(), ArticleSearch.class);
 
         return searchHits.getSearchHits().stream().map(SearchHit::getContent).toList();
+    }
+
+    private Long getNewId() {
+        var first = this.articleSearchRepository.findFirstByOrderByArticleIdDesc();
+        return first.map(articleSearch -> articleSearch.getArticleId() + 1).orElse(0L);
     }
 }

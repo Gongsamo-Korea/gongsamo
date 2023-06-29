@@ -23,11 +23,7 @@ public class TagService {
     public TagSearch createTag(TagDto tagDto) {
         TagSearch tagSearch = tagDto.toEntity();
 
-        Long tagId = this.tagSearchRepository.getNewId();
-        if (tagId != null) {
-            this.tagSearchRepository.validateId(tagId);
-        }
-
+        Long tagId = this.getNewId();
         tagSearch.setTagId(tagId);
         return tagSearchRepository.save(tagSearch);
     }
@@ -46,5 +42,10 @@ public class TagService {
                     .build();
             return this.createTag(tagDto);
         }
+    }
+
+    private Long getNewId() {
+        var first = this.tagSearchRepository.findFirstByOrderByTagIdDesc();
+        return first.map(tagSearch -> tagSearch.getTagId() + 1).orElse(0L);
     }
 }

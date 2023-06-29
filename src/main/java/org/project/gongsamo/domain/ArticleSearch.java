@@ -16,7 +16,14 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 public class ArticleSearch {
+    /**
+     * Id로 명시된 필드의 경우 자동으로 Keyword 타입이 되므로 더미 필드를 추가한다.
+     * JPA CrudRepository를 사용하지 않도록 주의한다.
+     */
     @Id
+    @ToString.Exclude
+    private String id;
+
     @Field(type = FieldType.Long)
     @Setter
     private Long articleId = 0L;
@@ -30,14 +37,14 @@ public class ArticleSearch {
     @Field(type = FieldType.Text)
     private String title = "";
 
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Keyword, index = false)
     private String thumbnailUrl = null;
 
     @Field(type = FieldType.Text)
     @ToString.Exclude
     private String content = "";
 
-    @Field(type = FieldType.Keyword)
+    @Field(type = FieldType.Long)
     @ToString.Exclude
     private Long viewCount = 0L;
 
