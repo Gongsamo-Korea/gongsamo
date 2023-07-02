@@ -21,6 +21,7 @@ phases:
 
 artifacts:
   files:
+    - .env
     - appspec.yml
     - docker-compose.yml
     - build/libs/*.jar
