@@ -1,8 +1,12 @@
 # common setting
 spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
   elasticsearch:
     rest:
-      uri: localhost:9200
+      uri: elasticsearch
   jpa:
     hibernate:
       jdbc:
@@ -37,6 +41,10 @@ spring:
   config:
     activate:
       on-profile: local
+  data:
+    redis:
+      host: localhost
+      port: 6379
   datasource:
     url: jdbc:mysql://gongsamo-dev-rds-2a.cx02ihqfn9bx.ap-northeast-2.rds.amazonaws.com:3306/gongsamo_dev?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: gonsamo_dev
@@ -52,19 +60,14 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+  elasticsearch:
+    rest:
+      uri: localhost:9200
   jpa:
     database: mysql
 
-<<<<<<< HEAD
-=======
-  redis:
-    host: localhost
-    port: 6379
-
->>>>>>> 87a2bb2 (feat: viewcount api)
 ---
 # dev
-
 spring:
   config:
     activate:
@@ -87,10 +90,6 @@ spring:
   jpa:
     database: mysql
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-
-  redis:
-    host: localhost
-    port: 6379
 
 ---
 # prod
