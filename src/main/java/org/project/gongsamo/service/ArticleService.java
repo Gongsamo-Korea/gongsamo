@@ -32,7 +32,8 @@ public class ArticleService {
     public ArticleService(
         ArticleSearchRepository articleSearchRepository,
         TagService tagService,
-        ElasticsearchOperations elasticsearchOperations) {
+        ElasticsearchOperations elasticsearchOperations
+    ) {
         this.articleSearchRepository = articleSearchRepository;
         this.tagService = tagService;
         this.elasticsearchOperations = elasticsearchOperations;

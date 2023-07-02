@@ -20,7 +20,7 @@ do
 
   if [ $RETRY_COUNT -eq 10 ]
   then
-    echo "> Health Check 에 실패했습니다. 😭 "
+    echo "> Health Check 에 실패했습니다. 😭"
     exit 1
   fi
 

@@ -65,11 +65,17 @@ dependencies {
 
     // swagger
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.2'
+    
+    //redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+
 
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+
 }
 
 tasks.named('test') {
