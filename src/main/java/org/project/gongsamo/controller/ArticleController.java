@@ -31,18 +31,18 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(
-        summary = "뉴스레터 생성",
-        description = "뉴스레터 데이터를 엘라스틱서치에 저장합니다.",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "성공", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArticleResponseDto.class)))
-        }
-    )
-    public ResponseEntity<ArticleResponseDto> create(@RequestBody ArticleRequestDto articleRequestDto) {
-        var article = articleService.createArticle(articleRequestDto);
-        return ResponseEntity.ok(ArticleResponseDto.from(article));
-    }
+//    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//    @Operation(
+//        summary = "뉴스레터 생성",
+//        description = "뉴스레터 데이터를 엘라스틱서치에 저장합니다.",
+//        responses = {
+//            @ApiResponse(responseCode = "200", description = "성공", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArticleResponseDto.class)))
+//        }
+//    )
+//    public ResponseEntity<ArticleResponseDto> create(@RequestBody ArticleRequestDto articleRequestDto) {
+//        var article = articleService.createArticle(articleRequestDto);
+//        return ResponseEntity.ok(ArticleResponseDto.from(article));
+//    }
 
     @GetMapping("/{id}")
     @Operation(
@@ -79,7 +79,8 @@ public class ArticleController {
         @RequestParam(defaultValue = "") String keyword,
         @PageableDefault(size = PAGE_SIZE) Pageable pageable
     ) {
-        var articles = articleService.searchArticles(keyword, pageable).stream().map(ArticleResponseDto::from).toList();
+        var articles = articleService.findArticles(keyword, pageable).stream().map(ArticleResponseDto::from).toList();
+//        var articles = articleService.searchArticles(keyword, pageable).stream().map(ArticleResponseDto::from).toList();
         return ResponseEntity.ok(articles);
     }
 }

@@ -1,6 +1,7 @@
 package org.project.gongsamo.dto;
 
 import lombok.*;
+import org.project.gongsamo.domain.Tag;
 import org.project.gongsamo.domain.TagSearch;
 
 @Getter @Setter
@@ -11,6 +12,13 @@ import org.project.gongsamo.domain.TagSearch;
 public class TagDto {
     private Long id;
     private String name;
+
+    public static TagDto from(Tag tag) {
+        return TagDto.builder()
+                .id(tag.getTagId())
+                .name(tag.getTagName())
+                .build();
+    }
 
     public static TagDto from(TagSearch tagSearch) {
         return TagDto.builder()
