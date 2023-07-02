@@ -22,6 +22,7 @@ phases:
 artifacts:
   files:
     - appspec.yml
+    - docker-compose.yml
     - build/libs/*.jar
     - scripts/**
   discard-paths: yes
