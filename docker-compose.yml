@@ -5,7 +5,7 @@ services:
     container_name: spring
     ports:
       - 8080:8080
-    command: "echo stage: $STAGE version: $VERSION && java -jar -Dspring.profiles.active=$STAGE gongsamo-$VERSION.jar"
+    command: "java -jar -Dspring.profiles.active=$STAGE gongsamo-$VERSION.jar"
     healthcheck:
       test: ["CMD-SHELL", "curl", "-f", "http://localhost:8080/actuator/health || exit 1"]
       interval: 10s
