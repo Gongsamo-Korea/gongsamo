@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.5'
     id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.0.5'
 }
 
 group = 'org.project'
@@ -71,6 +71,9 @@ dependencies {
 
     // actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // scheduler
+    testImplementation 'org.awaitility:awaitility:4.2.0'
 
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
