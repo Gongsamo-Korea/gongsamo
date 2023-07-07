@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document(indexName = "articles")
+@Document(indexName = "articles", createIndex = false)
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

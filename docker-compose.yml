@@ -5,9 +5,9 @@ services:
     container_name: spring
     ports:
       - 8080:8080
-    command: "java -jar -Dspring.profiles.active=$STAGE gongsamo-$VERSION.jar"
+    command: "java -jar -Dspring.profiles.active=$STAGE ./home/gongsamo-$VERSION.jar"
     volumes:
-      - ./:/
+      - ./build/libs/:/home
     healthcheck:
       test: ["CMD-SHELL", "curl", "-f", "http://localhost:8080/actuator/health || exit 1"]
       interval: 10s
@@ -26,8 +26,6 @@ services:
       - 9200:9200
       - 9300:9300
     command: "bin/elasticsearch"
-    networks:
-      - elastic
     healthcheck:
       test: ["CMD-SHELL", "curl", "-f", "http://localhost:9200/_cluster/health || exit 1"]
       interval: 30s

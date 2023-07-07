@@ -25,7 +25,7 @@ dependencies {
     // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    //querydsl
+    // querydsl
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta' // querydsl JPAAnnotationProcessor 사용 지정
     annotationProcessor 'jakarta.annotation:jakarta.annotation-api' // java.lang.NoClassDefFoundError (javax.annotation.Generated) 발생 대응
@@ -66,10 +66,11 @@ dependencies {
     // swagger
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.2'
     
-    //redis
+    // redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-
+    // actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     // test
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
