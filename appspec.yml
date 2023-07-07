@@ -16,11 +16,11 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: deploy.sh
+    - location: gongsamo/build/deploy.sh
       timeout: 600
       runas: ubuntu
   ValidateService:
-    - location: healthCheck.sh
+    - location: gongsamo/build/healthCheck.sh
       timeout: 60
       runas: ubuntu
 
