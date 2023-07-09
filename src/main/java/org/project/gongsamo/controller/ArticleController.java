@@ -41,7 +41,7 @@ public class ArticleController {
     )
     public ResponseEntity<ArticleResponseDto> create(@RequestBody ArticleRequestDto articleRequestDto) {
         var article = articleService.createArticle(articleRequestDto);
-        return ResponseEntity.ok(ArticleResponseDto.from(article));
+        return ResponseEntity.ok(ArticleResponseDto.listFrom(article));
     }
 
     @GetMapping("/{id}")
@@ -53,7 +53,7 @@ public class ArticleController {
         }
     )
     public ResponseEntity<Optional<ArticleResponseDto>> article(@PathVariable("id") Long id) {
-        var article = articleService.findArticle(id).map(ArticleResponseDto::from);
+        var article = articleService.findArticle(id).map(ArticleResponseDto::detailFrom);
 
         if (article.isEmpty()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(article);
@@ -79,7 +79,7 @@ public class ArticleController {
         @RequestParam(defaultValue = "") String keyword,
         @PageableDefault(size = PAGE_SIZE) Pageable pageable
     ) {
-        var articles = articleService.searchArticles(keyword, pageable).stream().map(ArticleResponseDto::from).toList();
+        var articles = articleService.searchArticles(keyword, pageable).stream().map(ArticleResponseDto::listFrom).toList();
         return ResponseEntity.ok(articles);
     }
 }

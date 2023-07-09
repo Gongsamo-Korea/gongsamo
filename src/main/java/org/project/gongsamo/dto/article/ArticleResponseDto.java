@@ -14,13 +14,25 @@ public class ArticleResponseDto {
     private Long id;
     private String issueNumber;
     private String tableOfContent;
+    private String content;
     private String title;
     private String thumbnailUrl;
     private Long viewCount;
     private LocalDateTime issueDate;
     private List<TagDto> tags;
 
-    public static ArticleResponseDto from(ArticleSearch articleSearch) {
+    public static ArticleResponseDto listFrom(ArticleSearch articleSearch) {
+            return common(articleSearch)
+                .build();
+    }
+
+    public static ArticleResponseDto detailFrom(ArticleSearch articleSearch) {
+        return common(articleSearch)
+                .content(articleSearch.getContent())
+                .build();
+    }
+
+    private static ArticleResponseDtoBuilder common(ArticleSearch articleSearch) {
         return ArticleResponseDto.builder()
                 .id(articleSearch.getArticleId())
                 .issueNumber(articleSearch.getIssueNumber())
@@ -29,7 +41,6 @@ public class ArticleResponseDto {
                 .thumbnailUrl(articleSearch.getThumbnailUrl())
                 .viewCount(articleSearch.getViewCount())
                 .issueDate(articleSearch.getIssueDate())
-                .tags(articleSearch.getTags().stream().map(TagDto::from).toList())
-                .build();
+                .tags(articleSearch.getTags().stream().map(TagDto::from).toList());
     }
 }
