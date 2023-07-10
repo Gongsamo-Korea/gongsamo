@@ -7,7 +7,7 @@ services:
       - 8080:8080
     command: "java -jar -Dspring.profiles.active=$STAGE ./home/gongsamo-$VERSION.jar"
     volumes:
-      - ./build/libs/:/home
+      - ./:/home
     healthcheck:
       test: ["CMD-SHELL", "curl", "-f", "http://localhost:8080/actuator/health || exit 1"]
       interval: 10s
